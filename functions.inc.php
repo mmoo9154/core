@@ -4296,7 +4296,7 @@ function core_trunks_disable($trunk, $switch) {
 }
 
 // we're adding ,don't require a $trunknum
-function core_trunks_add($tech, $channelid, $dialoutprefix, $maxchans, $outcid, $peerdetails, $usercontext, $userconfig, $register, $keepcid, $failtrunk, $disabletrunk, $name="", $provider="", $continue="off", $dialopts=false) {
+function core_trunks_add($tech, $channelid, $dialoutprefix, $maxchans, $outcid, $peerdetails, $usercontext, $userconfig, $register, $keepcid, $failtrunk, $disabletrunk, $name="", $provider="", $continue="off", $dialopts=false, $routedisplay="on") {
 	$settings = array(
 		"channelid" => $channelid,
 		"dialoutprefix" => $dialoutprefix,
@@ -4311,13 +4311,14 @@ function core_trunks_add($tech, $channelid, $dialoutprefix, $maxchans, $outcid, 
 		"disabletrunk" => $disabletrunk,
 		"provider" => $provider,
 		"continue" => $continue,
-		"dialopts" => $dialopts
+		"dialopts" => $dialopts,
+		"routedisplay" => $routedisplay
 	);
 	return FreePBX::Core()->addTrunk($name, $tech, $settings);
 }
 
 
-function core_trunks_edit($trunknum, $channelid, $dialoutprefix, $maxchans, $outcid, $peerdetails, $usercontext, $userconfig, $register, $keepcid, $failtrunk, $disabletrunk, $name="", $provider="", $continue='off', $dialopts = false) {
+function core_trunks_edit($trunknum, $channelid, $dialoutprefix, $maxchans, $outcid, $peerdetails, $usercontext, $userconfig, $register, $keepcid, $failtrunk, $disabletrunk, $name="", $provider="", $continue='off', $dialopts = false, $routedisplay="on") {
 	$tech = FreePBX::Core()->getTrunkTech($trunknum);
 	if ($tech == "") {
 		return false;
@@ -4337,7 +4338,8 @@ function core_trunks_edit($trunknum, $channelid, $dialoutprefix, $maxchans, $out
 		"disabletrunk" => $disabletrunk,
 		"provider" => $provider,
 		"continue" => $continue,
-		"dialopts" => $dialopts
+		"dialopts" => $dialopts,
+		"routedisplay" => $routedisplay
 	);
 	\FreePBX::Core()->deleteTrunk($trunknum, $tech, true);
 	if($tech == 'pjsip') {
