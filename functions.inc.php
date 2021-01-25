@@ -4351,7 +4351,7 @@ function core_trunks_edit($trunknum, $channelid, $dialoutprefix, $maxchans, $out
 // just used internally by addTrunk() and editTrunk()
 //obsolete
 // This is not obsolete 8-( 2013-12-31.
-function core_trunks_backendAdd($trunknum, $tech, $channelid, $dialoutprefix, $maxchans, $outcid, $peerdetails, $usercontext, $userconfig, $register, $keepcid, $failtrunk, $disabletrunk, $name, $provider, $continue, $dialopts=false) {
+function core_trunks_backendAdd($trunknum, $tech, $channelid, $dialoutprefix, $maxchans, $outcid, $peerdetails, $usercontext, $userconfig, $register, $keepcid, $failtrunk, $disabletrunk, $name, $provider, $continue, $dialopts=false, $routedisplay="on") {
 	$settings = array(
 		"trunknum" => $trunknum,
 		"channelid" => $channelid,
@@ -4368,7 +4368,8 @@ function core_trunks_backendAdd($trunknum, $tech, $channelid, $dialoutprefix, $m
 		"name" => $name,
 		"provider" => $provider,
 		"continue" => $continue,
-		"dialopts" => $dialopts
+		"dialopts" => $dialopts,
+		"routedisplay" => $routedisplay
 	);
 	if($tech == 'pjsip') {
 		$settings = array_merge($_REQUEST,$settings);
