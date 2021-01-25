@@ -196,9 +196,9 @@ if(!empty($trunkpriority) && is_array($trunkpriority)) {
 			 	$trunkhtml .= '<select id="trunkpri'.$key.'" name="trunkpriority['.$key.']" class="form-control '. ($trunkstate[$trunk]=='off' &&  $trunkdisplay[$trunk] == 'on'?"":'text-danger').'">';
 				$trunkhtml .= '<option value=""></option>';
 				foreach ($trunks as $name=>$display_description) {
-					if ($trunkstate[$name] == 'off' && $trunkdisplay[$trunk] == 'on') {
+					if ($trunkstate[$name] == 'off' && $trunkdisplay[$name] == 'on') {
 						$trunkhtml .= '<option id="trunk'.$key.'" name="trunk'.$key.'" value="'.$name.'" '.($name == $trunk ? "selected" : "").'>'.str_replace('AMP:', '', $display_description).'</option>';
-					} else if ($trunkdisplay[$trunk] == 'on') {
+					} else if ($trunkdisplay[$name] == 'on') {
 						$trunkhtml .= '<option id="trunk'.$key.'" class="text-danger" name="trunk'.$key.'" value="'.$name.'" '.($name == $trunk ? "selected" : "").'>'.str_replace('AMP:', '', $display_description).'</option>';
 					}
 				}
@@ -222,9 +222,9 @@ for ($i=0; $i < $num_new_boxes; $i++) {
 	$trunkhtml .= '<select id="trunkpri'.$key.'" name="trunkpriority['.$key.']" class="form-control">';
 	$trunkhtml .= '<option value="" SELECTED></option>';
 	foreach ($trunks as $name=>$display_description) {
-		if ($trunkstate[$name] == 'off' && $trunkdisplay[$trunk] == 'on') {
+		if ($trunkstate[$name] == 'off' && $trunkdisplay[$name] == 'on') {
 			$trunkhtml .= '<option value="'.$name.'">'.str_replace('AMP:', '', $display_description).'</option>';
-		} else if ($trunkdisplay[$trunk] == 'on') {
+		} else if ($trunkdisplay[$name] == 'on') {
 			$trunkhtml .= '<option value="'.$name.'" class="text-danger" >*'.str_replace('AMP:','',$display_description).'*</option>';
 		}
 	}
