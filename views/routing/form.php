@@ -222,9 +222,9 @@ for ($i=0; $i < $num_new_boxes; $i++) {
 	$trunkhtml .= '<select id="trunkpri'.$key.'" name="trunkpriority['.$key.']" class="form-control">';
 	$trunkhtml .= '<option value="" SELECTED></option>';
 	foreach ($trunks as $name=>$display_description) {
-		if ($trunkstate[$name] == 'off') {
+		if ($trunkstate[$name] == 'off' && $trunkdisplay[$trunk] == 'on') {
 			$trunkhtml .= '<option value="'.$name.'">'.str_replace('AMP:', '', $display_description).'</option>';
-		} else {
+		} else if ($trunkdisplay[$trunk] == 'on') {
 			$trunkhtml .= '<option value="'.$name.'" class="text-danger" >*'.str_replace('AMP:','',$display_description).'*</option>';
 		}
 	}
