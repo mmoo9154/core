@@ -3995,4 +3995,16 @@ class Core extends FreePBX_Helpers implements BMO  {
 			return false;
 		}
 	}
+
+	public function getencryptionval($ext, $dial) {
+		if ($dial == 'PJSIP' ) {
+			$sql = "SELECT * FROM sip WHERE id ='$ext' AND keyword='encryption'";
+		} else {
+			$sql = "SELECT * FROM sip WHERE id ='$ext' AND keyword='media_encryption'";
+		}
+		$stmt = $this->database->prepare($sql);
+		$stmt->execute();
+		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		return $result;
+	}
 }

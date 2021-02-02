@@ -25,7 +25,14 @@ class Sip extends techDriver {
 	}
 
 	public function getDefaultDeviceSettings($id, $displayname, &$flag) {
+
 		$dial = 'SIP';
+		$getencryptionval = $this->freepbx->Core()->getencryptionval($id, $dial);
+		if (isset($getencryptionval[0]['data']) && $getencryptionval[0]['data'] != 'no') {
+			$encryption = 'yes';
+		} else {
+			$encryption = 'no';
+		}
 		$settings  = array(
 			"sipdriver" => array(
 				"value" => "chan_sip",
@@ -96,7 +103,7 @@ class Sip extends techDriver {
 				"flag" => $flag++
 			),
 			"encryption" => array(
-				"value" => $this->freepbx->Config->get('DEVICE_SIP_ENCRYPTION'),
+				"value" => $encryption,
 				"flag" => $flag++
 			),
 			"namedcallgroup" => array(

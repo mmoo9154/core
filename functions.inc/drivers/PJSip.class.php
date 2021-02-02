@@ -49,6 +49,12 @@ class PJSip extends \FreePBX\modules\Core\Drivers\Sip {
 			$dtmf = "rfc4733";
 		}
 		$dial = 'PJSIP';
+		$getencryptionval = $this->freepbx->Core()->getencryptionval($id, $dial);
+		if (isset($getencryptionval[0]['data']) && $getencryptionval[0]['data'] == 'yes') {
+			$media_encryption = 'sdes';
+		} else {
+			$media_encryption = 'no';
+		}
 		$settings  = array(
 			"sipdriver" => array(
 				"value" => "chan_pjsip",
@@ -151,7 +157,7 @@ class PJSip extends \FreePBX\modules\Core\Drivers\Sip {
 				"flag" => $flag++
 			),
 			"media_encryption" => array(
-				"value" => "no",
+				"value" => $media_encryption,
 				"flag" => $flag++
 			),
 			"media_encryption_optimistic" => array(
@@ -295,7 +301,7 @@ class PJSip extends \FreePBX\modules\Core\Drivers\Sip {
 		$select[] = array('value' => 'sdes', 'text' => _('SRTP via in-SDP (recommended)'));
 		$select[] = array('value' => 'dtls', 'text' => _('DTLS-SRTP (not recommended)'));
 		$tt = _("Determines whether res_pjsip will use and enforce usage of media encryption for this endpoint. Auto will enable SRTP via in-SDP encryption if TLS is enabled in SIPSettings.").' [media_encryption]';
-		$tmparr['media_encryption'] = array('prompttext' => _('Media Encryption'), 'value' => 'no', 'tt' => $tt, 'select' => $select, 'level' => 1);
+		$tmparr['media_encryption'] = array('prompttext' => _('Media Encryption'), 'value' => $this->freepbx->Config->get_conf_setting('DEVICE_SIP_ENCRYPTION') == 'yes' ? 'sdes' : 'no', 'tt' => $tt, 'select' => $select, 'level' => 1);
 		unset($select);
 
 		$select[] = array('value' => 'no', 'text' => _('No'));
