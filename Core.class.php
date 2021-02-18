@@ -3948,10 +3948,6 @@ class Core extends \FreePBX_Helpers implements \BMO  {
 	 * @return boolean           Result of execute
 	 */
 	public function hideTrunk($id){
-		$tech = $this->getTrunkTech($id);
-		if(!$tech){
-			return false;
-		}
 		$sql = "UPDATE trunks set routedisplay = 'off' WHERE trunkid = ?";
 		$ob = $this->database->prepare($sql);
 		$ret = $ob->execute(array($id));
@@ -3965,8 +3961,6 @@ class Core extends \FreePBX_Helpers implements \BMO  {
 	 * @return boolean           Result of execute
 	 */
 	public function showTrunk($id){
-		$tech = $this->getTrunkTech($id);
-
 		$sql = "UPDATE trunks set routedisplay = 'on' WHERE trunkid = ?";
 		$ob = $this->database->prepare($sql);
 		$ret = $ob->execute(array($id));
